@@ -68,55 +68,6 @@ public class Ticket {
                 '}';
     }
 
-    class Passenger {
-        private String name;
-        private String lastName;
-        private int age;
-        private String gender;
-
-        @Override
-        public String toString() {
-            return "Passenger{" +
-                    "name='" + name + '\'' +
-                    ", lastName='" + lastName + '\'' +
-                    ", age=" + age +
-                    ", gender='" + gender + '\'' +
-                    '}';
-        }
-
-        public String getName() {
-            return name;
-        }
-
-        public void setName(String name) {
-            this.name = name;
-        }
-
-        public String getLastName() {
-            return lastName;
-        }
-
-        public void setLastName(String lastName) {
-            this.lastName = lastName;
-        }
-
-        public int getAge() {
-            return age;
-        }
-
-        public void setAge(int age) {
-            this.age = age;
-        }
-
-        public String getGender() {
-            return gender;
-        }
-
-        public void setGender(String gender) {
-            this.gender = gender;
-        }
-    }
-
     public String getBookingId() {
         return bookingId;
     }
