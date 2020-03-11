@@ -77,6 +77,12 @@ public class CheckInService {
         ).map(Optional::ofNullable).findFirst().orElse(null);
     }
 
+    public Optional<Ticket> getBoardingPass(String bookingId, String lastName) {
+        return ticketList.stream().filter(t ->
+                (t.isCheckIn()) && (t.getBookingId().equals(bookingId)) && (t.getEmail().equalsIgnoreCase(lastName) || t.getLastName().equalsIgnoreCase(lastName))
+        ).map(Optional::ofNullable).findFirst().orElse(null);
+    }
+
 
     private String data = "[\n" +
             "  {\n" +

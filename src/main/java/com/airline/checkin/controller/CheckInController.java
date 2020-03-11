@@ -21,15 +21,28 @@ public class CheckInController {
         System.out.println(bookingId + "========" + lastName);
         Optional<Ticket> ticket = checkInService.getTicketCheckInStatus(bookingId, lastName);
         if (ticket != null && ticket.isPresent()) {
-            return new ResponseEntity("CheckIn is done for the given booking details", HttpStatus.NO_CONTEN80);
-        }else {
+            return new ResponseEntity("CheckIn is done for the given booking details", HttpStatus.FOUND);
+        } else {
             ticket = checkInService.getTicketDetails(bookingId, lastName);
             if (ticket != null && ticket.isPresent()) {
                 return new ResponseEntity<Ticket>(ticket.get(), HttpStatus.OK);
             } else {
-                return new ResponseEntity("No Ticket found for the given booking Details", HttpStatus.NO_CONTENT);
+                return new ResponseEntity("No Ticket found for the given booking Details", HttpStatus.NOT_FOUND);
             }
         }
+    }
+
+    @GetMapping("/boarding-pass/{bookingId}/{lastName}")
+    public ResponseEntity getBoardingPass(@PathVariable("bookingId") String bookingId, @PathVariable("lastName") String lastName) {
+        System.out.println(bookingId + "========" + lastName);
+        Optional<Ticket> ticket = checkInService.getTicketCheckInStatus(bookingId, lastName);
+        if (ticket != null && ticket.isPresent()) {
+            ticket = checkInService.getBoardingPass(bookingId, lastName);
+            if (ticket != null && ticket.isPresent()) {
+                return new ResponseEntity<Ticket>(ticket.get(), HttpStatus.OK);
+            }
+        }
+        return new ResponseEntity("No Boarding Pass found for the given booking Details", HttpStatus.NOT_FOUND);
     }
 
 
@@ -39,7 +52,7 @@ public class CheckInController {
         if (ticket1.isPresent()) {
             return new ResponseEntity<Ticket>(ticket1.get(), HttpStatus.OK);
         } else {
-            return new ResponseEntity("No Ticket found for the given booking", HttpStatus.OK);
+            return new ResponseEntity("No Ticket found for the given booking", HttpStatus.NOT_FOUND);
         }
     }
 }
